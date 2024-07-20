@@ -1,228 +1,140 @@
-"""
-This code provides functions for aligning text based on the specified width and alignment type.
 
-Functions:
-- `left_align(words, width)`: Aligns the words to the left within the specified width.
-- `right_align(words, width)`: Aligns the words to the right within the specified width.
-- `center_align(words, width)`: Aligns the words to the center within the specified width.
-- `justify_align(words, width)`: Aligns the words using justified alignment within the specified width.
-- `align_text(text, width, alignment)`: Aligns the text based on the specified width and alignment type.
+# Text Alignment Simulator
 
-Usage:
-1. Call the `align_text()` function with the text, width, and alignment type as parameters to align the text.
+This project simulates text alignment operations for a given string and width. It supports four types of alignments:
+- Left
+- Right
+- Center
+- Justify
 
-<<<<<<< HEAD
-Example:
-```python
-text = "Hi everyone, Iam Karthika Krishna K, I am a student of VCET Puttur. I hope you all are doing fine. Have a great day!!"
-width = 20
-alignment = "justified"
-aligned_text = align_text(text, width, alignment)
-print(aligned_text)
-# Output:
-Hi  everyone,  I  am
-Karthika  Krishna  K,
-I  am  a  student  of
-VCET  Puttur.  I  hope
-you  all  are  doing
-fine.  Have  a  great
-day!!
-=======
->>>>>>> 7ccf56a85e6647b167fe7ce3b49b4993cfd6c459
+## Features
+- Overflowing characters precede with '-' and are pushed to a new line.
+- Numbers are handled properly, with overflowing numbers pushed to a new line entirely.
+- Supports multiple lines of input text.
 
+## Requirements
+- Python 3.x
+
+## Usage
+
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/your-username/text-alignment-simulator.git
+   cd text-alignment-simulator
+   ```
+
+2. Run the script:
+   ```sh
+   python align_text.py
+   ```
+
+3. Follow the prompts to enter the text, width, and alignment type.
+
+## Example
+### Input:
+```
+Enter the text (end with an empty line):
+This is an example of text alignment simulation.
+Overflowing words and numbers are handled appropriately.
+123456789012345 should be on a new line if it overflows.
+```
+### Output:
+```
+Enter the width: 20
+Enter the alignment (left, right, center, justify): justify
+
+Justify Aligned:
+This is an example-
+of text alignment-
+simulation.
+Overflowing words-
+and numbers are-
+handled-
+appropriately.
+123456789012345-
+should be on a new-
+line if it overflows.
 ```
 
-How the code works for the function - justify
+## Functions
 
-- **Text**: "Hi everyone, I am Karthika Krishna K, I am a student of VCET Puttur. I hope you all are doing fine. Have a great day!!"
-- **Width**: 20
+### `left_align(words, width)`
+Aligns the text to the left.
 
-We'll focus on the lines before and after adding the word "Karthika" since the line will be justified at this point:
+### `right_align(words, width)`
+Aligns the text to the right.
 
-### First Line
-Words: `["Hi", "everyone,", "I", "am"]`
-- `current_length` is 14 (before adding "Karthika")
+### `center_align(words, width)`
+Centers the text.
 
-#### Justifying "Hi everyone, I am"
-- `total_spaces = width - current_length = 20 - 14 = 6`
-- `space_between_words = total_spaces // (len(current_line) - 1) = 6 // 3 = 2`
-- `extra_spaces = total_spaces % (len(current_line) - 1) = 6 % 3 = 0`
-- Spaces distribution:
-    - "Hi" + 2 spaces + "everyone," + 2 spaces + "I" + 2 spaces + "am"
+### `justify_align(words, width)`
+Justifies the text.
 
-**Justified Line:**
+### `align_text(text, width, alignment)`
+Aligns the text based on the specified alignment.
+
+## Time Complexity Analysis
+
+- The time complexity for all alignment functions is O(n), where n is the total number of characters in the input text.
+- Each word is processed once, and operations like string joining and slicing are linear in nature.
+- Overall, the algorithm efficiently handles the text alignment within linear time.
+
+## Trace Example
+
+### Input Line:
 ```
-"Hi  everyone,  I  am"
+This is an example of text alignment simulation.
 ```
+### Process:
 
-### Second Line
-Words: `["Karthika", "Krishna", "K,"]`
-- `current_length` is 17 (before adding "I")
+1. **Left Align (`width=20`):**
+   - Current line: "This is an" (length 10)
+   - Current line: "example of" (length 10)
+   - Current line: "text alignment-" (length 14, overflows and breaks at width)
+   - Current line: "simulation." (length 11)
 
-#### Justifying "Karthika Krishna K,"
-- `total_spaces = width - current_length = 20 - 17 = 3`
-- `space_between_words = total_spaces // (len(current_line) - 1) = 3 // 2 = 1`
-- `extra_spaces = total_spaces % (len(current_line) - 1) = 3 % 2 = 1`
-- Spaces distribution:
-    - "Karthika" + 2 spaces + "Krishna" + 1 space + "K,"
+   **Output:**
+   ```
+   This is an example of-
+   text alignment-
+   simulation.
+   ```
 
-**Justified Line:**
-```
-"Karthika  Krishna K,"
-```
+2. **Right Align (`width=20`):**
+   - Uses the left-aligned output and right-aligns each line:
+   
+   **Output:**
+   ```
+   This is an example-
+              of text-
+   alignment-
+            simulation.
+   ```
 
-1. **First Line**:
-```
-"Hi  everyone,  I  am"
-```
-2. **Second Line**:
-```
-"Karthika  Krishna  K,"
-```
+3. **Center Align (`width=20`):**
+   - Uses the left-aligned output and centers each line:
+   
+   **Output:**
+   ```
+   This is an example-
+       of text-
+       alignment-
+      simulation.
+   ```
 
-The code continues...
+4. **Justify Align (`width=20`):**
+   - Similar to left align but spreads words to fill the width where possible:
+   
+   **Output:**
+   ```
+   This is an example-
+   of text alignment-
+   simulation.
+   ```
 
-```
-Functions Present -
-def left_align(words, width):
-        """
-        Aligns the words to the left within the specified width.
+---
 
-        Args:
-        - words (list): A list of words to be aligned.
-        - width (int): The width of the alignment.
+This example demonstrates how the program processes a single line of input for each alignment type. For more complex cases with multiple lines and varying content, the program's logic ensures proper alignment and handling of overflowing text.
 
-        Returns:
-        - lines (list): A list of aligned lines.
-
-        """
-        # Implementation details...
-
-def right_align(words, width):
-        """
-        Aligns the words to the right within the specified width.
-
-        Args:
-        - words (list): A list of words to be aligned.
-        - width (int): The width of the alignment.
-
-        Returns:
-        - lines (list): A list of aligned lines.
-
-        """
-        # Implementation details...
-
-def center_align(words, width):
-        """
-        Aligns the words to the center within the specified width.
-
-        Args:
-        - words (list): A list of words to be aligned.
-        - width (int): The width of the alignment.
-
-        Returns:
-        - lines (list): A list of aligned lines.
-
-        """
-        # Implementation details...
-
-def justify_align(words, width):
-        """
-        Aligns the words using justified alignment within the specified width.
-
-        Args:
-        - words (list): A list of words to be aligned.
-        - width (int): The width of the alignment.
-
-        Returns:
-        - lines (list): A list of aligned lines.
-
-        """
-        # Implementation details...
-
-def align_text(text, width, alignment):
-        """
-        Aligns the text based on the specified width and alignment type.
-
-        Args:
-        - text (str): The text to be aligned.
-        - width (int): The width of the alignment.
-        - alignment (str): The type of alignment (left, right, center, justify).
-
-        Returns:
-        - aligned_text (str): The aligned text.
-
-        Raises:
-        - ValueError: If an invalid alignment type is provided.
-
-        """
-        # Implementation details...
-
-<<<<<<< HEAD
-=======
-    """
-Example:
-```python
-text = "Hi everyone, Iam Karthika Krishna K, I am a student of VCET Puttur. I hope you all are doing fine. Have a great day!!"
-width = 20
-alignment = "justified"
-aligned_text = align_text(text, width, alignment)
-print(aligned_text)
-# Output:
-Hi  everyone,  I  am
-Karthika  Krishna  K,
-I  am  a  student  of
-VCET  Puttur.  I  hope
-you  all  are  doing
-fine.  Have  a  great
-day!!
-
-How the code works for the function - justify
-
-- **Text**: "Hi everyone, I am Karthika Krishna K, I am a student of VCET Puttur. I hope you all are doing fine. Have a great day!!"
-- **Width**: 20
-
-We'll focus on the lines before and after adding the word "Karthika" since the line will be justified at this point:
-
-### First Line
-Words: `["Hi", "everyone,", "I", "am"]`
-- `current_length` is 14 (before adding "Karthika")
-
-#### Justifying "Hi everyone, I am"
-- `total_spaces = width - current_length = 20 - 14 = 6`
-- `space_between_words = total_spaces // (len(current_line) - 1) = 6 // 3 = 2`
-- `extra_spaces = total_spaces % (len(current_line) - 1) = 6 % 3 = 0`
-- Spaces distribution:
-  - "Hi" + 2 spaces + "everyone," + 2 spaces + "I" + 2 spaces + "am"
-
-**Justified Line:**
-```
-"Hi  everyone,  I  am"
-```
-
-### Second Line
-Words: `["Karthika", "Krishna", "K,"]`
-- `current_length` is 17 (before adding "I")
-
-#### Justifying "Karthika Krishna K,"
-- `total_spaces = width - current_length = 20 - 17 = 3`
-- `space_between_words = total_spaces // (len(current_line) - 1) = 3 // 2 = 1`
-- `extra_spaces = total_spaces % (len(current_line) - 1) = 3 % 2 = 1`
-- Spaces distribution:
-  - "Karthika" + 2 spaces + "Krishna" + 1 space + "K,"
-
-**Justified Line:**
-```
-"Karthika  Krishna K,"
-```
-
-1. **First Line**:
-```
-"Hi  everyone,  I  am"
-```
-2. **Second Line**:
-```
-"Karthika  Krishna  K,"
-```
->>>>>>> 7ccf56a85e6647b167fe7ce3b49b4993cfd6c459
-
+### Contact
+For any issues or feature requests, please open an issue on the GitHub repository.
