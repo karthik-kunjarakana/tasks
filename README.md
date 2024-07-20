@@ -128,11 +128,11 @@ Words: `["Hi", "everyone,", "I", "am"]`
 "Hi  everyone,  I  am"
 ```
 
-### Second Line
+Second Line
 Words: `["Karthika", "Krishna", "K,"]`
 - `current_length` is 17 (before adding "I")
 
-#### Justifying "Karthika Krishna K,"
+ Justifying "Karthika Krishna K,"
 - `total_spaces = width - current_length = 20 - 17 = 3`
 - `space_between_words = total_spaces // (len(current_line) - 1) = 3 // 2 = 1`
 - `extra_spaces = total_spaces % (len(current_line) - 1) = 3 % 2 = 1`
@@ -143,11 +143,10 @@ Words: `["Karthika", "Krishna", "K,"]`
 ```
 "Karthika  Krishna K,"
 ```
-
 1. First Line:
 ```
 "Hi  everyone,  I  am"
 ```
-2. **Second Line**:
+2. Second Line:
 ```
 "Karthika  Krishna  K,"
