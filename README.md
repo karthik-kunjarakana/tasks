@@ -111,7 +111,7 @@ How the code works for the function - justify
 - **Width**: 20
 
 We'll focus on the lines before and after adding the word "Karthika" since the line will be justified at this point:
-
+```
 ### First Line
 Words: `["Hi", "everyone,", "I", "am"]`
 - `current_length` is 14 (before adding "Karthika")
