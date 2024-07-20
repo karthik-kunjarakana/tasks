@@ -1,4 +1,3 @@
-
 # Text Alignment Simulator
 
 This project simulates text alignment operations for a given string and width. It supports four types of alignments:
