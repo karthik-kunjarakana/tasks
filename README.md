@@ -144,12 +144,10 @@ Words: `["Karthika", "Krishna", "K,"]`
 "Karthika  Krishna K,"
 ```
 
-1. **First Line**:
+1. First Line:
 ```
 "Hi  everyone,  I  am"
 ```
 2. **Second Line**:
 ```
 "Karthika  Krishna  K,"
-```
-
