@@ -144,7 +144,6 @@ Words: `["Karthika", "Krishna", "K,"]`
 "Karthika  Krishna K,"
 ```
 
-### Summary
 1. **First Line**:
 ```
 "Hi  everyone,  I  am"
