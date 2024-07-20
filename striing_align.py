@@ -5,11 +5,25 @@ def left_align(words, width):
 
     for word in words:
         if current_length + len(word) + len(current_line) > width:
-            lines.append(' '.join(current_line))
-            current_line = []
-            current_length = 0
-        current_line.append(word)
-        current_length += len(word)
+            if word.isdigit():
+                if current_line:
+                    lines.append(' '.join(current_line))
+                current_line = [word]
+                current_length = len(word)
+            else:
+                while current_length + len(word) + len(current_line) > width:
+                    space_left = width - current_length - len(current_line)
+                    if space_left > 0:
+                        current_line.append(word[:space_left] + '-')
+                        word = word[space_left:]
+                    lines.append(' '.join(current_line))
+                    current_line = []
+                    current_length = 0
+                current_line.append(word)
+                current_length += len(word)
+        else:
+            current_line.append(word)
+            current_length += len(word)
 
     if current_line:
         lines.append(' '.join(current_line))
@@ -31,27 +45,30 @@ def justify_align(words, width):
 
     for word in words:
         if current_length + len(word) + len(current_line) > width:
-            if len(current_line) == 1:
-                lines.append(current_line[0].ljust(width))
+            if word.isdigit():
+                if current_line:
+                    lines.append(' '.join(current_line))
+                current_line = [word]
+                current_length = len(word)
             else:
-                total_spaces = width - current_length
-                space_between_words = total_spaces // (len(current_line) - 1)
-                extra_spaces = total_spaces % (len(current_line) - 1)
-                line = ''
-                for i in range(len(current_line) - 1):
-                    line += current_line[i] + ' ' * (space_between_words + (1 if i < extra_spaces else 0))
-                line += current_line[-1]
-                lines.append(line)
-            current_line = []
-            current_length = 0
-        current_line.append(word)
-        current_length += len(word)
+                while current_length + len(word) + len(current_line) > width:
+                    space_left = width - current_length - len(current_line)
+                    if space_left > 0:
+                        current_line.append(word[:space_left] + '-')
+                        word = word[space_left:]
+                    lines.append(' '.join(current_line))
+                    current_line = []
+                    current_length = 0
+                current_line.append(word)
+                current_length += len(word)
+        else:
+            current_line.append(word)
+            current_length += len(word)
 
     if current_line:
-        lines.append(' '.join(current_line).ljust(width))
+        lines.append(' '.join(current_line))
 
     return lines
-
 def align_text(text, width, alignment):
     lines = text.split('\n')
     aligned_lines = []
