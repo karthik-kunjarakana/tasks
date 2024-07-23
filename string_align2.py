@@ -1,3 +1,16 @@
+# # Text Alignment Tool
+
+# This Python script aligns text according to specified alignment options: left, right, center, and justify.
+
+# ## Usage
+
+# 1. Run the script.
+# 2. Enter the text line by line. Finish input by entering an empty line.
+# 3. Enter the desired width.
+# 4. Enter the desired alignment type (`left`, `right`, `center`, `justify`).
+
+
+
 def left_align(words, width):
     lines = []
     current_line = []
